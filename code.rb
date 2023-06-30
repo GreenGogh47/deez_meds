@@ -1,47 +1,46 @@
-# My Solution V1
+require "date"
+require "pry"
 
 def pills_distribution(total_pills)
-  chris = 0
-  sam = 0
-  april = 0
+  raise "Invalid total number of pills" unless total_pills.is_a?(Integer) && total_pills.positive?
+  raise "Total number of pills must be even" unless total_pills.even?
+
+  
+  chris = {pills: 0}
+  sam = {pills: 0}
+  april = {pills: 0}
+  
   puts "Total pills: #{total_pills}\n"
   
-  until total_pills == 0
-    # Friday
-    chris += 1
-    april += 1
-    total_pills -= 2
-    # Saturday
-    sam += 2
-    total_pills -= 2
-    # Sunday
-    sam += 2
-    total_pills -= 2
-    # Monday
-    sam += 1
-    april += 1
-    total_pills -= 2
-    # Tuesday
-    sam += 1
-    april += 1
-    total_pills -= 2
-    # Wednesday
-    chris += 1
-    april += 1
-    total_pills -= 2
-    #Thursday
-    chris += 1
-    april += 1
-    total_pills -= 2
+  date = Date.today
+  pills_per_day = 2
+
+  people = {
+    monday: [sam, april],
+    tuesday: [sam, april],
+    wednesday: [chris, april],
+    thursday: [chris, april],
+    friday: [chris, april],
+    saturday: [sam],
+    sunday: [sam],
+  }
+
+  while total_pills > 0
+    total_pills -= pills_per_day
+    current_day = date.strftime("%A").downcase.to_sym
+    require 'pry'; binding.pry
+    pills_per_person = pills_per_day / people[current_day].length
+    people[current_day].each { |person| person[:pills] += pills_per_person }
+    date += 1
   end
 
   # 4th of July I have them for lunch instead of april
-  chris += 1
-  april -= 1
+  chris[:pills] += 1
+  april[:pills] -= 1
 
-  puts "Chris: #{chris}"
-  puts "Sam: #{sam}"
-  puts "April: #{april}"
+  puts "Chris: #{chris[:pills]}"
+  puts "Sam: #{sam[:pills]}"
+  puts "April: #{april[:pills]}"
 end
 
-pills_distribution(28)
+pills_distribution(60)
