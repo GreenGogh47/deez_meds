@@ -22,7 +22,7 @@ Every time my daycare receives a bottle of pills, it has to be counted. And NO O
 
 3. Install required dependancies by running `bundle install`.
 
-## Usage
+## Usage for 'code.rb'
 
 1. Enter the number of pills taken per day on line 11.
 
@@ -81,3 +81,7 @@ Every time my daycare receives a bottle of pills, it has to be counted. And NO O
     ```
 
 7. Run `ruby code.rb`, and the output will be displayed in the terminal.
+
+## Usage for 'er_meds.rb'
+
+This code only accounts for 1 Extended Release pill per day. In this case, daycare isn't part of the equation, because he's only taking one pill in the morning (or in the evening depending on the medication).
