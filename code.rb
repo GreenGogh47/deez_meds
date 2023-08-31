@@ -7,21 +7,22 @@ def pills_distribution(total_pills)
 
   puts "Total pills: #{total_pills}\n\n"
   
-  date = Date.today
+  date = Date.today + 6 # Start on Wednesday after Labor Day break
   pills_per_day = 2 # One in the morning and one at lunch
 
   chris = {pills: 0}
   sam = {pills: 0}
-  april = {pills: 0}
+  school = {pills: 0}
 
   people = {
-    monday: [sam, april],
-    tuesday: [sam, april],
-    wednesday: [chris, april],
-    thursday: [chris, april],
-    friday: [chris, april],
+    monday: [sam, school],
+    tuesday: [sam, school],
+    wednesday: [chris, school],
+    thursday: [chris, school],
+    friday: [chris, school],
     saturday: [sam],
     sunday: [sam],
+    # weekends are "skip days" to reduce chance of building a tolerance.
   }
 
   while total_pills > 0
@@ -29,16 +30,21 @@ def pills_distribution(total_pills)
     current_day = date.strftime("%A").downcase.to_sym
     pills_per_person = pills_per_day / people[current_day].length
     people[current_day].each { |person| person[:pills] += pills_per_person }
-    date += 1
+    # This if statement is to ignore the weekends
+    if date.wday == 5 # If it's Friday
+      date += 3 # Skip to Monday
+    else
+      date += 1
+    end
   end
 
-  # 4th of July I have them for lunch instead of april
-  chris[:pills] += 1
-  april[:pills] -= 1
+  # 4th of July I have them for lunch instead of school
+  # chris[:pills] += 1
+  # school[:pills] -= 1
 
   puts "Chris: #{chris[:pills]}"
   puts "Sam: #{sam[:pills]}"
-  puts "April: #{april[:pills]}"
+  puts "School: #{school[:pills]}"
 end
 
-pills_distribution(60)
+pills_distribution(28)
