@@ -1,5 +1,6 @@
 require "date"
 require "pry"
+require "./lib/schedule"
 
 def pills_distribution(total_pills)
   raise "Total number of pills must be a positive number" unless total_pills.is_a?(Integer) && total_pills.positive?
