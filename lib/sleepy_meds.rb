@@ -23,6 +23,6 @@ def sleepy_meds(total_pills)
 
   # Final Display
   puts "#{chris.name}: #{chris.pills}"
-  puts "#{sam.name}: #{sam.pills}"
+  puts "#{sam.name}: #{sam.pills}\n\n"
 
 end
